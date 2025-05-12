@@ -1,27 +1,40 @@
 package org.skypro.skyshop;
 
+import org.skypro.skyshop.product.DiscountProduct;
+import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.basket.ProductBasket;
+import org.skypro.skyshop.product.SimpleProduct;
 
 public class App {
     public static void main(String[] args) {
         int total;
+        int counter=0;
 
        //создание продуктов и занесение их в корзину
-        Product orange=new Product("orandge",100);
+        DiscountProduct orange=new DiscountProduct("orandge",100,10);
         ProductBasket basket = new ProductBasket();
         basket.addProduct(orange);
-        Product banana=new Product("banana",90);
+        SimpleProduct banana=new SimpleProduct("banana",90);
         basket.addProduct(banana);
-        Product potato=new Product("potato",80);
+        SimpleProduct potato=new SimpleProduct("potato",80);
         basket.addProduct(potato);
-        Product tomato=new Product("tomato",200);
+        FixPriceProduct tomato=new FixPriceProduct("tomato");
         basket.addProduct(tomato);
-        Product apple=new Product("apple",50);
+        SimpleProduct apple=new SimpleProduct("apple",50);
         basket.addProduct(apple);
 
+        //Определение спецификации продукта
+        for (int i = 0; i < ProductBasket.products.length; i++) {
+            if (ProductBasket.products[i].isSpecial()){
+                counter++;
+            }
+        }
+        System.out.println("Специальных продуктов в корзине: "+counter);
+
+
         //добавление продукта в полную корзину
-        Product pinapple=new Product("pinapple",70);
+        SimpleProduct pinapple=new SimpleProduct("pinapple",70);
         basket.addProduct(pinapple);
 
         //Печать общей стоимости корзины

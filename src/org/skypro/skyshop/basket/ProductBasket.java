@@ -4,7 +4,9 @@ package org.skypro.skyshop.basket;
 import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
-   private Product[] products = new Product[5];
+
+
+   public static Product[] products = new Product[5];
 
 public  void addProduct(Product product){
    for (int i = 0; i < products.length; i++) {
