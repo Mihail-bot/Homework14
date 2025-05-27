@@ -11,7 +11,7 @@ public class SimpleProduct extends Product {
     }
 
     public  SimpleProduct(String name, int price){
-        super(name);
+        super(1,name,10.0);
         this.price=price;
 
     }
@@ -23,4 +23,9 @@ public class SimpleProduct extends Product {
     public boolean isSpecial(){
         return false;
     }
+    @Override
+    public String getSearchTerm() {
+        return this.getName();
+    }
+
 }

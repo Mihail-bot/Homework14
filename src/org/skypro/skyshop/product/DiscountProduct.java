@@ -1,8 +1,8 @@
 package org.skypro.skyshop.product;
 
 public class DiscountProduct extends Product {
-   private double basePrice;
-   private int discount;
+   private final double basePrice;
+   private final int discount;
    private double price;
 
 
@@ -13,7 +13,7 @@ public class DiscountProduct extends Product {
     }
 
     public DiscountProduct(String name, int basePrice, int discount) {
-        super(name);
+        super(1,name,10.0);
         this.basePrice = basePrice;
         this.discount = discount;
 
@@ -26,5 +26,9 @@ public class DiscountProduct extends Product {
 
     public boolean isSpecial(){
         return true;
+    }
+    @Override
+    public String getSearchTerm() {
+        return this.getName();
     }
 }

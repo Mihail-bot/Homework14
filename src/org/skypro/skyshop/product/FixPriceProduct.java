@@ -9,7 +9,7 @@ public class FixPriceProduct extends Product{
     }
 
     public FixPriceProduct(String name) {
-        super(name);
+        super(1,name,10.0);
     }
 
     @Override
@@ -19,5 +19,9 @@ public class FixPriceProduct extends Product{
 
     public boolean isSpecial(){
         return true;
+    }
+    @Override
+    public String getSearchTerm() {
+        return this.getName();
     }
 }
