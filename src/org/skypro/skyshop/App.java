@@ -7,6 +7,11 @@ import org.skypro.skyshop.product.DiscountProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SimpleProduct;
+import java.util.List;
+import java.util.Arrays;
+import org.skypro.skyshop.article.Searchable;
+import org.skypro.skyshop.article.BestResultNotFound;
+
 
 public class App {
     public static void main(String[] args) {
@@ -99,5 +104,46 @@ public class App {
 
         System.out.println("\nРезультаты поиска по запросу 'история':");
         engine.search("история").stream().forEach(System.out::println);
+
+        try {
+            Product product = new SimpleProduct("",1);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage()); // Ожидаемый вывод: "Имя продукта не может быть пустым."
+        }
+
+        try {
+            SimpleProduct simpleProduct = new SimpleProduct("Test", 0);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage()); // Ожидаемый вывод: "Цена должна быть строго больше нуля."
+        }
+
+        try {
+            DiscountProduct discountedProduct = new DiscountProduct("Discounted Test", 100, 101);
+        } catch(IllegalArgumentException e) {
+            System.out.println(e.getMessage()); // Ожидаемый вывод: "Процент скидки должен быть в диапазоне от 0 до 100 включительно."
+        }
+        try {
+            Searchable result = engine.findMostRelevant(products, "продукт");
+            System.out.println(result.getClass().getSimpleName());
+        } catch(BestResultNotFound e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            Searchable notFound = engine.findMostRelevant(products, "неправильный запрос");
+            System.out.println(notFound.getClass().getSimpleName());
+        } catch(BestResultNotFound e) {
+            System.out.println(e.getMessage()); // Ожидаемый вывод: "Не найдено подходящих элементов для 'неправильный запрос'"
+        }
+
     }
+    private static List<Searchable> products = Arrays.asList(
+            new SimpleProduct("Простой продукт", 10),
+            new DiscountProduct("Скидочный продукт", 20, 10),
+            new SimpleProduct("Тестовый товар", 15)
+    );
+
+    SearchEngine engine = new SearchEngine(0);
+
+
 }

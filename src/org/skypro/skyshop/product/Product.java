@@ -9,8 +9,14 @@ public abstract class Product implements Searchable {
    private double price;
 
 
-   public Product(int id, String name, double price) {
-      this.id=id;
+
+
+
+   public Product(int id, String name, double price) throws IllegalArgumentException{
+       if(name.isBlank()) { // isBlank проверяет пустоту и наличие только пробелов
+           throw new IllegalArgumentException("Имя продукта не может быть пустым");
+       }
+       this.id=id;
       this.name = name;
       this.price=price;
    }

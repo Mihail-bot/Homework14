@@ -10,8 +10,11 @@ public class SimpleProduct extends Product {
 
     }
 
-    public  SimpleProduct(String name, int price){
+    public  SimpleProduct(String name, int price)  throws IllegalArgumentException{
         super(1,name,10.0);
+        if(price <= 0) {
+            throw new IllegalArgumentException("Цена должна быть строго больше нуля.");
+        }
         this.price=price;
 
     }

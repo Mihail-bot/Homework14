@@ -3,6 +3,8 @@ package org.skypro.skyshop.article;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class SearchEngine {
     private List<Searchable> items;
 
@@ -14,6 +16,39 @@ public class SearchEngine {
     // Добавление нового объекта для поиска
     public void add(Searchable item) {
         items.add(item);
+    }
+
+    public Searchable findMostRelevant(List<Searchable> items, String searchQuery) throws BestResultNotFound {
+        Searchable bestMatch = null;
+        int maxCount = -1;
+
+        for(Searchable item : items) {
+            int count = countOccurrences(item.getSearchTerm(), searchQuery);
+
+            if(count > maxCount) {
+                maxCount = count;
+                bestMatch = item;
+            }
+        }
+
+        if(bestMatch == null) {
+            throw new BestResultNotFound("Не найдено подходящих элементов для '" + searchQuery + "'");
+        }
+
+        return bestMatch;
+    }
+
+    // Вспомогательная функция подсчета количества вхождений подстроки
+    private int countOccurrences(String text, String subStr) {
+        int count = 0;
+        int startIndex = 0;
+
+        while((startIndex = text.indexOf(subStr, startIndex)) >= 0) {
+            count++;
+            startIndex += subStr.length();
+        }
+
+        return count;
     }
 
     // Поиск по строке и возврат максимум 5 результатов
