@@ -1,26 +1,43 @@
 package org.skypro.skyshop.basket;
-
+import java.util.List;
 
 import org.skypro.skyshop.product.Product;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ProductBasket {
+   public List<Product> products = new ArrayList<>();
 
+  // public static Product[] products = new Product[5];
 
-   public static Product[] products = new Product[5];
+public  void addProduct(Product product) {
+   for (int i = 0; i < products.size(); i++) {
+      if (products.get(i) == null) {
+         products.add(product);
 
-public  void addProduct(Product product){
-   for (int i = 0; i < products.length; i++) {
-      if (products[i]==null){
-         products[i]=product;
-
-         System.out.println(products[i]);
+         System.out.println(products.get(i));
          return;
       }
 
    }
    System.out.println("Корзина полна");
-
 }
+   public List<Product> removeByName(String name) {
+      List<Product> removedProducts = new ArrayList<>();
+
+      for (Iterator<Product> iterator = products.iterator(); iterator.hasNext(); ) {
+         Product currentProduct = iterator.next();
+
+         if (currentProduct.getName().equals(name)) {
+            removedProducts.add(currentProduct);   // собираем удалённые товары
+            iterator.remove();                     // удаляем товар из корзины
+         }
+      }
+
+      return removedProducts;
+   }
+
+
    public int getTotalPrice() {
       int total = 0;
       for (Product product : products) {
@@ -33,8 +50,8 @@ public  void addProduct(Product product){
 
    public void printProduct(){
       System.out.println("Содержимое корзины: ");
-   for (int i = 0; i < products.length; i++) {
-         System.out.println(products[i]);
+   for (int i = 0; i < products.size(); i++) {
+         System.out.println(products.get(i));
       }
    }
 
@@ -47,11 +64,7 @@ public  void addProduct(Product product){
       return false;
    }
 
-   public void clearBusket(){
-      for (int i = 0; i < products.length; i++) {
-         products[i]=null;
-         System.out.println(products[i]);
-      }
-   }
+
+
 }
 

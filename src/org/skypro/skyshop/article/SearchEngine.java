@@ -6,12 +6,32 @@ import java.util.List;
 
 
 public class SearchEngine {
+    private List<String> searchResults = new ArrayList<>();
+
     private List<Searchable> items;
 
     public SearchEngine(int size) {
         this.items = new ArrayList<>();
 
     }
+
+    // Поиск всех совпадений
+    public List<String> findAll(String keyword) {
+        // Пример простой реализации, возвращает все строки, содержащие указанный ключ
+        List<String> results = new ArrayList<>();
+        for (String result : searchResults) {
+            if (result.contains(keyword)) {
+                results.add(result);
+            }
+        }
+        return results;
+    }
+
+    // Добавляет новый результат поиска
+    public void addResult(String result) {
+        searchResults.add(result);
+    }
+
 
     // Добавление нового объекта для поиска
     public void add(Searchable item) {

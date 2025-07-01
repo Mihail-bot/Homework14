@@ -32,17 +32,53 @@ public class App {
         basket.addProduct(apple);
 
         //Определение спецификации продукта
-        for (int i = 0; i < ProductBasket.products.length; i++) {
-            if (ProductBasket.products[i].isSpecial()) {
+
+        for (int i = 0; i < basket.products.size(); i++) {
+            if (basket.products.get(i).isSpecial()) {
                 counter++;
             }
         }
         System.out.println("Специальных продуктов в корзине: " + counter);
 
+       // ProductBasket basket = new ProductBasket();
+        Product pinapple = new DiscountProduct("Apple",100,10);
+        Product ingir = new SimpleProduct("Banana",50);
+        Product radish = new SimpleProduct("Orange",60);
+
+        // Добавляем товары в корзину
+        basket.addProduct(pinapple);
+        basket.addProduct(ingir);
+        basket.addProduct(radish);
+
+        // Показываем содержимое корзины перед удалением
+        basket.printProduct(); // Выведет Apple, Banana, Orange
+
+        // Удаляем продукт по имени ("Banana")
+        List<Product> deletedItems = basket.removeByName("Banana");
+
+        // Проверяем удалённые товары
+        System.out.println("\nУдалены следующие товары:");
+        deletedItems.forEach(System.out::println); // Выведет Banana
+
+        // Повторно показываем содержимое корзины
+        basket.printProduct(); // Теперь выведет только Apple и Orange
+
+        // Пробуем удалить несуществующий продукт
+        deletedItems.clear();
+        deletedItems = basket.removeByName("Melon");
+
+        // Проверяем список удалённых товаров
+        if (deletedItems.isEmpty()) {
+            System.out.println("\nСписок пуст.");
+        }
+
+        // Печатаем итоговое состояние корзины
+        basket.printProduct(); // Не изменилось, всё ещё выводит Apple и Orange
+
 
         //добавление продукта в полную корзину
-        SimpleProduct pinapple = new SimpleProduct("pinapple", 70);
-        basket.addProduct(pinapple);
+        SimpleProduct spinapple = new SimpleProduct("pinapple", 70);
+        basket.addProduct(spinapple);
 
         //Печать общей стоимости корзины
         total = basket.getTotalPrice();
@@ -60,7 +96,7 @@ public class App {
         }
 
         //Очистка корзины и печать содержимого корзины
-        basket.clearBusket();
+        basket.removeByName(tomato.getName());
 
         //Стоимость пустой корзины
         total = basket.getTotalPrice();
