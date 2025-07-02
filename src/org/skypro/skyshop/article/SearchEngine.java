@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class SearchEngine {
     private List<String> searchResults = new ArrayList<>();
 
@@ -27,11 +26,6 @@ public class SearchEngine {
         return results;
     }
 
-    // Добавляет новый результат поиска
-    public void addResult(String result) {
-        searchResults.add(result);
-    }
-
 
     // Добавление нового объекта для поиска
     public void add(Searchable item) {
@@ -42,16 +36,16 @@ public class SearchEngine {
         Searchable bestMatch = null;
         int maxCount = -1;
 
-        for(Searchable item : items) {
+        for (Searchable item : items) {
             int count = countOccurrences(item.getSearchTerm(), searchQuery);
 
-            if(count > maxCount) {
+            if (count > maxCount) {
                 maxCount = count;
                 bestMatch = item;
             }
         }
 
-        if(bestMatch == null) {
+        if (bestMatch == null) {
             throw new BestResultNotFound("Не найдено подходящих элементов для '" + searchQuery + "'");
         }
 
@@ -63,7 +57,7 @@ public class SearchEngine {
         int count = 0;
         int startIndex = 0;
 
-        while((startIndex = text.indexOf(subStr, startIndex)) >= 0) {
+        while ((startIndex = text.indexOf(subStr, startIndex)) >= 0) {
             count++;
             startIndex += subStr.length();
         }
