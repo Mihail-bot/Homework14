@@ -35,8 +35,8 @@ public class App {
 
         //Определение спецификации продукта
 
-        for (int i = 0; i < basket.products.size(); i++) {
-            if (basket.products.get(i).isSpecial()) {
+        for (int i = 0; i < basket.getProducts().size(); i++) {
+            if (basket.getProducts().get(i).isSpecial()) {
                 counter++;
             }
         }

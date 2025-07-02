@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ProductBasket {
-    public List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     // public static Product[] products = new Product[5];
 
@@ -67,6 +67,8 @@ public class ProductBasket {
         return false;
     }
 
-
+    public List<Product> getProducts() {
+        return new ArrayList<>(this.products);
+    }
 }
 
