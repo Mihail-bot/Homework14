@@ -2,12 +2,13 @@ package org.skypro.skyshop.article;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
     private List<String> searchResults = new ArrayList<>();
 
-    private List<Searchable> items;
+    private List<Searchable> items = new ArrayList<>();
 
     public SearchEngine(int size) {
         this.items = new ArrayList<>();
@@ -78,4 +79,18 @@ public class SearchEngine {
         }
         return results;
     }
-}
+   // class SearchEngine {
+   //     private List<Searchable> items = new ArrayList<>();
+
+        /** * Возвращает отсортированный по именам результат поиска. */
+        public Map<String, Searchable> searchByNameSorted(String name) {
+            TreeMap<String, Searchable> results = new TreeMap<>();
+            for (Searchable item : items) {
+                if (item.getName().contains(name)) {
+                    results.put(item.getName(), item); // помещаем объекты в карту, ключи автоматически сортируются
+                }
+            }
+            return results;
+        }
+    }
+
