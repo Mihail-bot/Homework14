@@ -18,6 +18,12 @@ public abstract class Product implements Searchable {
         this.price = price;
     }
 
+    // Дополнительный конструктор без аргументов
+    public Product() {
+        this.id = 0;
+        this.name = "";
+        this.price = 0.0;
+    }
     public int getId() {
         return id;
     }
