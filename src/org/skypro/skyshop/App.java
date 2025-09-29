@@ -11,6 +11,7 @@ import org.skypro.skyshop.product.SimpleProduct;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
 import org.skypro.skyshop.article.Searchable;
 import org.skypro.skyshop.article.BestResultNotFound;
@@ -57,18 +58,18 @@ public class App {
         System.out.println(hasTomato ? "Томаты есть в корзине." : "Томатов нет в корзине.");
 
         // Использование поискового движка
-        SearchEngine engine = new SearchEngine(8);
-        engine.add(orange);
-        engine.add(banana);
-        engine.add(potato);
-        engine.add(tomato);
-        engine.add(apple);
-        engine.add(pineapple);
+        SearchEngine engine = new SearchEngine();
+        engine.addItem(orange);
+        engine.addItem(banana);
+        engine.addItem(potato);
+        engine.addItem(tomato);
+        engine.addItem(apple);
+        engine.addItem(pineapple);
 
         // Поиск продукта по имени
-        Map<String, Searchable> results = engine.searchByNameSorted("a");
+        Set<Searchable> results = engine.search("a");
         System.out.println("Найденные продукты начинающиеся на букву 'a':");
-        results.forEach((key, value) -> System.out.println(key + ": " + value));
+        results.forEach(item -> System.out.println(item));
 
         // Обработка исключений
         try {
