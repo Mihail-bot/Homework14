@@ -6,6 +6,7 @@ import org.skypro.skyshop.product.DiscountProduct;
 import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
 import org.skypro.skyshop.product.SpecialProduct;
+import java.util.stream.Collectors;
 
 public class ProductBasket {
     private final Map<String, List<Product>> basket = new TreeMap<>(Comparator.naturalOrder());
@@ -69,6 +70,14 @@ public class ProductBasket {
                 .filter(p -> p instanceof SpecialProduct)
                 .count();
     }
+
+    public List<String> getProductNames() {
+        return basket.values().stream()  // Получаем коллекцию списков продуктов и превращаем её в стрим
+                .flatMap(List::stream) // Разворачиваем стрим списков в стрим продуктов
+                .map(Product::getName) // Преобразуем каждый продукт в его имя
+               .collect(Collectors.toList()); // Собираем все имена в список
+   }
+
 }
 
 

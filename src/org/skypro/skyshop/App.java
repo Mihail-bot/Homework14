@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.skypro.skyshop.article.Searchable;
 import org.skypro.skyshop.article.BestResultNotFound;
@@ -66,8 +67,13 @@ public class App {
         engine.addItem(apple);
         engine.addItem(pineapple);
 
+        ProductBasket baskets = new ProductBasket();
+        List<String> productNames = basket.getProductNames();
+        productNames.forEach(System.out::println); // Печатаем имена продуктов
+
+
         // Поиск продукта по имени
-        Set<Searchable> results = engine.search("a");
+        TreeSet<String> results = engine.search(productNames,"a");
         System.out.println("Найденные продукты начинающиеся на букву 'a':");
         results.forEach(item -> System.out.println(item));
 
