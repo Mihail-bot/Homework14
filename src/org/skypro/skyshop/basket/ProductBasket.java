@@ -2,10 +2,8 @@ package org.skypro.skyshop.basket;
 
 import java.util.*;
 
-import org.skypro.skyshop.product.DiscountProduct;
-import org.skypro.skyshop.product.FixPriceProduct;
 import org.skypro.skyshop.product.Product;
-import org.skypro.skyshop.product.SpecialProduct;
+
 import java.util.stream.Collectors;
 
 public class ProductBasket {
@@ -67,7 +65,7 @@ public class ProductBasket {
     public long countSpecialProducts() {
         return basket.values().stream()
                 .flatMap(List::stream)
-                .filter(p -> p instanceof SpecialProduct)
+                .filter(p -> p instanceof Product.Special)
                 .count();
     }
 
