@@ -65,7 +65,7 @@ public class ProductBasket {
     public long countSpecialProducts() {
         return basket.values().stream()
                 .flatMap(List::stream)
-                .filter(p -> p instanceof Product.Special)
+                .filter(Product::isSpecial)
                 .count();
     }
 

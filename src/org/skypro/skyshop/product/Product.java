@@ -10,10 +10,6 @@ public abstract class Product implements Searchable {
     private String name;
     private double price;
 
-    public interface Special {
-        boolean isSpecial(); // Возвращает true, если товар особенный
-    }
-
 
     /**
      * Основной конструктор с проверкой валидности имени.
