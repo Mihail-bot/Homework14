@@ -7,7 +7,7 @@ import org.skypro.skyshop.product.Product;
 import java.util.stream.Collectors;
 
 public class ProductBasket {
-    private final Map<String, List<Product>> basket = new TreeMap<>(Comparator.naturalOrder());
+    private final Map<String, List<Product>> basket = new HashMap<>();
 
     public void addProduct(Product product) {
         String name = product.getName();
